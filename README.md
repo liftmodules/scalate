@@ -11,7 +11,7 @@ See...
 
 * [Example project using Scalate](https://github.com/lift/lift/tree/master/examples/helloscalate).
 
-
+**Note:** The module package changed from `net.liftweb.scalate` to `net.liftmodules.scalate` in May 2012.  Please consider this when referencing documentation written before that date.
 
 ---
 

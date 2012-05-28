@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.liftweb
+package net.liftmodules
 package scalate
 
 import java.io.File
@@ -25,6 +25,7 @@ import org.fusesource.scalate.layout.DefaultLayoutStrategy
 import org.fusesource.scalate.util.{ClassPathBuilder, FileResourceLoader}
 import org.fusesource.scalate.{DefaultRenderContext, ResourceNotFoundException, Binding, TemplateEngine}
 
+import net.liftweb._
 import common._
 import http.LiftRules
 import http.provider.servlet.HTTPServletContext
