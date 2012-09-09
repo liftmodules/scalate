@@ -1,39 +1,40 @@
 name := "scalate"
 
-liftVersion <<= liftVersion ?? "2.4"
+organization := "net.liftmodules"
+
+liftVersion <<= liftVersion ?? "2.5-SNAPSHOT"
 
 version <<= liftVersion apply { _ + "-1.1-SNAPSHOT" }
+ 
+scalaVersion := "2.9.2"
+ 
+scalacOptions ++= Seq("-unchecked", "-deprecation")
+ 
+crossScalaVersions := Seq("2.9.2", "2.9.1-1", "2.9.1", "2.9.0-1", "2.9.0")
 
-organization := "net.liftmodules"
- 
-scalaVersion := "2.9.1"
- 
-crossScalaVersions := Seq("2.8.1", "2.9.0-1", "2.9.1")
+resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public"
 
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 
 libraryDependencies <++= liftVersion { v =>
   "net.liftweb" %% "lift-webkit" % v % "compile->default" ::
   Nil
-}    
+} 
 
 libraryDependencies <++= scalaVersion { sv => 
   "org.fusesource.scalate" % "scalate-core" % "1.4.1" ::
   "javax.servlet" % "servlet-api" % "2.5" % "provided" ::
   (sv match { 
-      case "2.8.0" => "org.scala-tools.testing" %% "specs" % "1.6.5" % "test"
-      case "2.9.1" => "org.scala-tools.testing" %% "specs" % "1.6.9" % "test"
-      case "2.9.2" => "org.scala-tools.testing" % "specs_2.9.1" % "1.6.9" % "test"
+      case "2.9.2" | "2.9.1" | "2.9.1-1" => "org.scala-tools.testing" % "specs_2.9.1" % "1.6.9" % "test"
       case _ =>  "org.scala-tools.testing" %% "specs" % "1.6.8" % "test"
       })  :: 
    (sv match { 
-      case "2.8.0" => "org.scalacheck" %% "scalacheck" % "1.7" % "test"
-      case "2.8.1" | "2.8.2" =>  "org.scalacheck" %% "scalacheck" % "1.8" % "test"
       case "2.9.2"  => "org.scalacheck" % "scalacheck_2.9.1" % "1.9" % "test"
       case _ => "org.scalacheck" %% "scalacheck" % "1.9" % "test"
       })  ::
   Nil
 }
+
 
 publishTo <<= version { _.endsWith("SNAPSHOT") match {
  	case true  => Some("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
