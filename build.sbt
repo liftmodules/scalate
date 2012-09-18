@@ -22,7 +22,7 @@ libraryDependencies <++= liftVersion { v =>
 } 
 
 libraryDependencies <++= scalaVersion { sv => 
-  "org.fusesource.scalate" % "scalate-core" % "1.4.1" ::
+  "org.fusesource.scalate" % "scalate-core" % "1.5.3" ::
   "javax.servlet" % "servlet-api" % "2.5" % "provided" ::
   (sv match { 
       case "2.9.2" | "2.9.1" | "2.9.1-1" => "org.scala-tools.testing" % "specs_2.9.1" % "1.6.9" % "test"
