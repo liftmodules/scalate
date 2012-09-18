@@ -26,7 +26,7 @@ import http._
 
 
 /**
- * A {@link LiftView} which uses a <a href="http://scalate.fusesource.org/">Scalate</a>
+ * A `LiftView` which uses a <a href="http://scalate.fusesource.org/">Scalate</a>
  * template engine to resolve a URI and render it as markup
  */
 class ScalateView(engine: LiftTemplateEngine = new LiftTemplateEngine()) extends LiftView with Logger {
@@ -34,7 +34,7 @@ class ScalateView(engine: LiftTemplateEngine = new LiftTemplateEngine()) extends
   /**
    * Registers this view with Lift's dispatcher
    */
-  def register: Unit = {
+  def register() {
     val scalateView: ScalateView = this
 
     /**
@@ -72,7 +72,7 @@ class ScalateView(engine: LiftTemplateEngine = new LiftTemplateEngine()) extends
   }
 
   protected def createUri(path: List[String], ext: String): String = path.mkString("/") +
-          (if (ext.length > 0) "." + ext else "")
+    (if (ext.length > 0) "." + ext else "")
 
   protected def canLoad(v: String): Boolean = {
     engine.canLoad(v)
