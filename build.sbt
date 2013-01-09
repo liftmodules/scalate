@@ -22,13 +22,20 @@ libraryDependencies <++= liftVersion { v =>
 } 
 
 libraryDependencies <++= scalaVersion { sv => 
-  "org.fusesource.scalate" % "scalate-core" % "1.5.3" ::
   "javax.servlet" % "servlet-api" % "2.5" % "provided" ::
   (sv match { 
 	 case "2.9.2" | "2.9.1" | "2.9.1-1" => "org.specs2" %% "specs2" % "1.12.3" % "test"
 	 case "2.10.0" => "org.specs2" %% "specs2" % "1.13" % "test"
 	 case "2.9.0-1" | "2.9.0" => "org.specs2" %% "specs2" % "1.7.1" % "test"
       })  :: 
+   (sv match { 
+      case "2.10.0"  => "org.fusesource.scalate" % "scalate-core_2.10" % "1.6.1"
+      case _ => "org.fusesource.scalate" % "scalate-core" % "1.5.3"
+      })  ::
+   (sv match { 
+      case "2.10.0"  => "org.fusesource.scalamd" %% "scalamd"  % "1.6"
+      case _ => "org.fusesource.scalamd" % "scalamd"  % "1.5"
+      })  ::
   Nil
 }
 
