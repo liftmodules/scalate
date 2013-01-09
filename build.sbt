@@ -29,7 +29,7 @@ libraryDependencies <++= scalaVersion { sv =>
 	 case "2.9.0-1" | "2.9.0" => "org.specs2" %% "specs2" % "1.7.1" % "test"
       })  :: 
    (sv match { 
-      case "2.10.0"  => "org.fusesource.scalate" % "scalate-core_2.10" % "1.6.1"
+      case "2.10.0"  => "org.fusesource.scalate" %% "scalate-core" % "1.6.1"
       case _ => "org.fusesource.scalate" % "scalate-core" % "1.5.3"
       })  ::
    (sv match { 
