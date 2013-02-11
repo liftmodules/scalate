@@ -82,6 +82,11 @@ class LiftTemplateEngine extends TemplateEngine with Loggable {
     override protected def toFile(uri: String) = {
       realFile(uri)
     }
+    
+    override def exists(uri : String) = {
+      if(uri.endsWith(".l.scaml")) false
+      else super.exists(uri)
+    }
 
     protected def toFileOrFail(uri: String): File = {
       val file = realFile(uri)
@@ -119,7 +124,6 @@ class LiftTemplateEngine extends TemplateEngine with Loggable {
         var answer: File = null
         if (path != null) {
           val file = new File(path)
-          logger.debug("file from realPath for: " + uri + " is: " + file)
           if (file.canRead) {answer = file}
         }
         answer

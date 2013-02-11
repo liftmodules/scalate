@@ -11,12 +11,12 @@ This module provides integration with Scalate in two ways: Lifted Scaml (in
 
 # Synopsis
 
-In ``Boot.scala``:
+In ``Boot.scala`` (You may enable either mode, or both):
 
-    LifedScaml.init("lscaml") // Turn on Lifted Scaml support (the parameter is your desired file suffix)
-    PureScaml.init("scaml") // Turn on Pure Scaml support
+    LifedScaml.init // Turn on Lifted Scaml support. Templates end in .l.scaml
+    PureScaml.init // Turn on Pure Scaml support. Templates end in just .scaml
 
-In .lscaml files:
+In .l.scaml files:
 
     %div(class="lift:Demo1.currentTime")
       %p The time is
@@ -29,19 +29,19 @@ In .scaml files:
         %span.time 
           = java.util.Date()
 
-**The file suffix determines the processing mode**. By default, the following
+**The file suffix determines the processing mode**. The following
 suffixes have the following meanings:
 
 - .scaml - Pure Scaml (no Lift pipeline)
-- .lscaml - Lifted Scaml (``scaml (once) -> HTML -> Lift``)
+- .l.scaml - Lifted Scaml (``scaml (once) -> HTML -> Lift``)
 - .html - Regular Lift processing (template content is  HTML5/XHTML)
 
-It is possible to turn the .lscaml/.scaml modes on separately, and it is also
+It is possible to turn the .l.scaml/.scaml modes on separately, and it is also
 possible to redefine the suffix that triggers the given method of processing.
 
 # Description
 
-## Lifted Scaml (.lscaml files)
+## Lifted Scaml (.l.scaml files)
 
 If enabled, files with this suffix are used purely as a templates for Lift. The
 rendering pipeline looks like this:
