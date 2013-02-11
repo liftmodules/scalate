@@ -15,7 +15,7 @@ See Also: [Sample project using Pure/Lifted Scaml](https://github.com/awkay/scal
 
 In ``Boot.scala`` (You may enable either mode, or both):
 
-    LifedScaml.init // Turn on Lifted Scaml support. Templates end in .l.scaml
+    LiftedScaml.init() // Turn on Lifted Scaml support. Templates end in .l.scaml
     PureScaml.init // Turn on Pure Scaml support. Templates end in just .scaml
 
 In .l.scaml files:
@@ -64,11 +64,11 @@ time, so that:
       %b
         = java.util.Date().toString()
 
-will generate a page with the correct time on every load. However, this
-is unlikely to be what you want in 
-production mode, since that means that two rendering pipelines would be 
-running for every page load. So, in production mode, it will cache the scalate
-result for performance, and you will see the time that the page first loaded.
+will generate a page with the correct time on every load. However, this is
+unlikely to be what you want in production mode, since that means that two
+rendering pipelines would be running for every page load. So, in production
+mode, it will cache the scalate result for performance, and you will see the
+time that the page first loaded.
 
 ### The Pros:
 
@@ -82,6 +82,10 @@ result for performance, and you will see the time that the page first loaded.
 
 - You cannot embed scala code in the template that has/requires side-effects,
   since it will only run once when in production mode. 
+
+### The Truth
+
+- You can disable the production-mode caching by passing `false` to the LiftedScaml.init method 
 
 ## Pure Scalate (MVC-style)
 

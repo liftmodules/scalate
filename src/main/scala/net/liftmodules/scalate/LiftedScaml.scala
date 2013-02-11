@@ -27,8 +27,6 @@ import net.liftweb.util.NoCache
  * **IMPORTANT**: In development mode, the scaml will be run every time; however, in production mode
  * the scaml will only every be processed once, so it must be side-effect free or it will not behave
  * as expected.
- *
- * TODO: Verify proper template caching.
  */
 object LiftedScaml {
   /**
@@ -37,16 +35,18 @@ object LiftedScaml {
    * This installs Scalate as a template resolver into the regular Lift pipeline.
    *
    * Templates must be named xxx.l.scaml
+   *
+   * @param Controls use of the template cache in production mode (recommended, as it encourages no code in your view)
    */
-  def init = {
-    val suffix = "l.scaml"
-    val resolver = new ScamlTemplateLoader(suffix)
+  def init(cachedInProduction: Boolean = true) = {
+    val resolver = new ScamlTemplateLoader(cachedInProduction)
     LiftRules.externalTemplateResolver.default.set(resolver.scalateTemplateLoader _)
   }
 }
 
-class ScamlTemplateLoader(suffix: String) extends Loggable {
+class ScamlTemplateLoader(val cacheInProduction: Boolean) extends Loggable {
   val renderer = new LiftTemplateEngine
+  val suffix = "l.scaml"
 
   protected def createUri(path: List[String]): String = path.mkString("/") + "." + suffix
 
@@ -59,7 +59,7 @@ class ScamlTemplateLoader(suffix: String) extends Loggable {
     case (locale, path) if (canRender(path)) => {
       val uri: String = createUri(path)
       val lrCache = LiftRules.templateCache
-      val cache = if (lrCache.isDefined) lrCache.openOrThrowException("Internal Cache Error") else NoCache
+      val cache = if (cacheInProduction && lrCache.isDefined) lrCache.openOrThrowException("Internal Cache Error") else NoCache
       val key = (locale, path)
       val cachedTemplate = cache.get(key)
       if (cachedTemplate.isDefined) {
