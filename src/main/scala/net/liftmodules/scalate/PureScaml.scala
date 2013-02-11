@@ -1,3 +1,8 @@
+/**
+ * PureScaml mode setup.
+ * 
+ * Author: Tony Kay <tony.kay@gmail.com>
+ */
 package net.liftmodules.scalate
 
 import net.liftweb.http.LiftRules
