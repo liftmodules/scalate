@@ -3,6 +3,8 @@
 This module provides integration with Scalate in two ways: Lifted Scaml (in
 2.0+), and Pure Scaml.
 
+See Also: [Sample project using Pure/Lifted Scaml](https://github.com/awkay/scalate-demo).
+
 ---
 
 **Note:** The module package changed from `net.liftweb.scalate` to `net.liftmodules.scalate` in May 2012.  Please consider this when referencing documentation written before that date.
@@ -46,8 +48,8 @@ possible to redefine the suffix that triggers the given method of processing.
 If enabled, files with this suffix are used purely as a templates for Lift. The
 rendering pipeline looks like this:
 
-    HTTP request --> There is an .lsaml file --> Lift externalTemplateResolver
-    --> Scaml to HTML/XHTML --> Lift 
+    HTTP request --> There is an .l.scaml file --> Lift externalTemplateResolver
+    --> Scaml to HTML/XHTML (cached in production) --> Lift 
 
 This means that you are using scaml to make it cleaner to write your semantic
 HTML. You can use this with both of Lift's primary template engines 
