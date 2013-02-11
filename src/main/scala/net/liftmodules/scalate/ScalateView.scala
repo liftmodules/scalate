@@ -24,7 +24,6 @@ import common._
 import util._
 import http._
 
-
 /**
  * A {@link LiftView} which uses a <a href="http://scalate.fusesource.org/">Scalate</a>
  * template engine to resolve a URI and render it as markup
@@ -34,6 +33,7 @@ class ScalateView(engine: LiftTemplateEngine = new LiftTemplateEngine()) extends
   /**
    * Registers this view with Lift's dispatcher
    */
+  @deprecated("Use PureScaml.init instead", "2013-02-10 (version 2.0)")
   def register: Unit = {
     val scalateView: ScalateView = this
 
@@ -64,10 +64,10 @@ class ScalateView(engine: LiftTemplateEngine = new LiftTemplateEngine()) extends
 
     if (ext == "") {
       canLoad(createUri(path, "scaml")) || canLoad(createUri(path, "ssp"))
-    }
+    } 
     else {
       val uri = createUri(path, ext)
-      (uri.endsWith(".ssp") || uri.endsWith(".scaml")) && canLoad(uri)
+      !uri.endsWith(".l.scaml") && (uri.endsWith(".ssp") || uri.endsWith(".scaml")) && canLoad(uri)
     }
   }
 
