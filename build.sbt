@@ -2,14 +2,14 @@ name := "scalate"
 
 organization := "net.liftmodules"
 
+version := "1.3-SNAPSHOT"
+
 liftVersion <<= liftVersion ?? "2.5-SNAPSHOT"
 
-version <<= liftVersion apply { _ + "-1.3-SNAPSHOT" }
- 
 scalaVersion := "2.10.0"
- 
+
 scalacOptions ++= Seq("-unchecked", "-deprecation")
- 
+
 crossScalaVersions := Seq("2.10.0", "2.9.2", "2.9.1-1", "2.9.1")
 
 resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public"
@@ -17,21 +17,21 @@ resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/pu
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 
 libraryDependencies <++= liftVersion { v =>
-  "net.liftweb" %% "lift-webkit" % v % "compile->default" ::
+  "net.liftweb" %% "lift-webkit" % v % "provided" ::
   Nil
-} 
+}
 
-libraryDependencies <++= scalaVersion { sv => 
+libraryDependencies <++= scalaVersion { sv =>
   "javax.servlet" % "servlet-api" % "2.5" % "provided" ::
-  (sv match { 
+  (sv match {
 	 case "2.9.2" | "2.9.1" | "2.9.1-1" => "org.specs2" %% "specs2" % "1.12.3" % "test"
 	 case "2.10.0" => "org.specs2" %% "specs2" % "1.13" % "test"
-      })  :: 
-   (sv match { 
+      })  ::
+   (sv match {
       case "2.10.0"  => "org.fusesource.scalate" %% "scalate-core" % "1.6.1"
       case _ => "org.fusesource.scalate" % "scalate-core" % "1.5.3"
       })  ::
-   (sv match { 
+   (sv match {
       case "2.10.0"  => "org.fusesource.scalamd" %% "scalamd"  % "1.6"
       case _ => "org.fusesource.scalamd" % "scalamd"  % "1.5"
       })  ::
@@ -43,7 +43,7 @@ publishTo <<= version { _.endsWith("SNAPSHOT") match {
  	case true  => Some("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
  	case false => Some("releases" at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
   }
- } 
+ }
 
 
 // For local deployment:
@@ -80,6 +80,6 @@ pomExtra := (
 	      <name>Lift Team</name>
 	      <url>http://www.liftmodules.net</url>
 	 	</developer>
-	 </developers> 
+	 </developers>
  )
-  
+
