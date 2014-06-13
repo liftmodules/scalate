@@ -10,13 +10,15 @@ liftEdition <<= liftVersion apply { _.substring(0,3) }
 
 moduleName <<= (name, liftEdition) { (n, e) =>  n + "_" + e }
 
-scalaVersion := "2.10.0"
+scalaVersion := "2.11.1"
 
 scalacOptions ++= Seq("-unchecked", "-deprecation")
 
-crossScalaVersions := Seq("2.10.0", "2.9.2", "2.9.1-1", "2.9.1")
+crossScalaVersions := Seq("2.11.0", "2.10.0", "2.9.2")
 
 resolvers += "CB Central Mirror" at "http://repo.cloudbees.com/content/groups/public"
+
+resolvers += "Sonatype Nexus Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 
 resolvers += "Java.net Maven2 Repository" at "http://download.java.net/maven/2/"
 
@@ -29,15 +31,15 @@ libraryDependencies <++= scalaVersion { sv =>
   "javax.servlet" % "servlet-api" % "2.5" % "provided" ::
   (sv match {
 	 case "2.9.2" | "2.9.1" | "2.9.1-1" => "org.specs2" %% "specs2" % "1.12.3" % "test"
-	 case "2.10.0" => "org.specs2" %% "specs2" % "1.13" % "test"
+	 case _ => "org.specs2" %% "specs2" % "2.3.12" % "test"
       })  ::
    (sv match {
-      case "2.10.0"  => "org.fusesource.scalate" %% "scalate-core" % "1.6.1"
-      case _ => "org.fusesource.scalate" % "scalate-core" % "1.5.3"
+      case "2.9.2" => "org.fusesource.scalate" % "scalate-core" % "1.5.3"
+      case  _ => "org.scalatra.scalate" %% "scalate-core" % "1.7.0"
       })  ::
    (sv match {
-      case "2.10.0"  => "org.fusesource.scalamd" %% "scalamd"  % "1.6"
-      case _ => "org.fusesource.scalamd" % "scalamd"  % "1.5"
+      case "2.9.2" => "org.fusesource.scalamd" % "scalamd"  % "1.5"
+      case _  => "org.scalatra.scalate" % "scalamd_2.11" % "1.6.1"
       })  ::
   Nil
 }

@@ -5,6 +5,10 @@ This module provides integration with Scalate.
 
 To include this module in your Lift project, update your `libraryDependencies` in `build.sbt` to include:
 
+*Lift 2.6* for Scala 2.11:
+
+    "net.liftmodules" %% "scalate_2.6" % "1.4-SNAPSHOT"
+
 *Lift 2.6.x* for Scala 2.9 and 2.10:
 
     "net.liftmodules" %% "scalate_2.6" % "1.3"
