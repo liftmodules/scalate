@@ -1,6 +1,8 @@
 Scalate Lift Module
 ==================
 
+[![Join the chat at https://gitter.im/liftmodules/scalate](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/liftmodules/scalate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This module provides integration with Scalate.
 
 To include this module in your Lift project, update your `libraryDependencies` in `build.sbt` to include:
